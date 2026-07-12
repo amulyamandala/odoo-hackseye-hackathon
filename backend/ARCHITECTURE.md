@@ -7,7 +7,7 @@ Welcome to the backend foundation for **AssetFlow**, an Enterprise Asset & Resou
 - **Backend Framework**: Express.js
 - **Runtime**: Node.js
 - **Frontend**: React (Implemented in a separate directory/module)
-- **Language**: TypeScript
+- **Language**: JavaScript
 
 ## 📁 Folder Structure
 
@@ -30,10 +30,9 @@ backend/
 │   ├── services/      # Core business logic
 │   ├── utils/         # Generic utilities (Dates, Crypto)
 │   ├── validations/   # Request payload validation schemas (e.g., Joi, Zod)
-│   ├── app.ts         # Express app initialization and middleware binding
-│   └── server.ts      # HTTP server entry point
+│   ├── app.js         # Express app initialization and middleware binding
+│   └── server.js      # HTTP server entry point
 ├── package.json
-└── tsconfig.json
 ```
 
 ---
