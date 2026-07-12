@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const employeeController = require('../controllers/employee.controller');
 
-router.post('/', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/:id', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.put('/:id', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.patch('/:id/deactivate', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.patch('/:id/reactivate', (req, res) => res.status(501).json({ message: 'Not implemented' }));
+router.post('/', employeeController.createEmployee);
+router.get('/', employeeController.getEmployees);
+router.get('/:id', employeeController.getEmployee);
+router.put('/:id', employeeController.updateEmployee);
+router.delete('/:id', employeeController.deleteEmployee);
 
 module.exports = router;
