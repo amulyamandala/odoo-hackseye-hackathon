@@ -3,11 +3,11 @@ const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize(
   process.env.DB_NAME || 'assetflow',
-  process.env.DB_USER || 'postgres',
-  process.env.DB_PASS || 'postgres',
+  process.env.DB_USER || 'root',
+  process.env.DB_PASS || '',
   {
     host: process.env.DB_HOST || 'localhost',
-    dialect: 'postgres',
+    dialect: 'mysql',
     logging: false,
   }
 );
