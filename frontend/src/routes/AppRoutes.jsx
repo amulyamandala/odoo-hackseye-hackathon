@@ -27,6 +27,7 @@ import EditAsset    from '../pages/EditAsset';
 import ScanQR       from '../pages/ScanQR';
 import Reports      from '../pages/Reports';
 import Settings     from '../pages/Settings';
+import Users        from '../pages/Users';
 import NotFound     from '../pages/NotFound';
 
 const AppRoutes = () => {
@@ -47,6 +48,7 @@ const AppRoutes = () => {
           <Route path="/assets/:id/edit"   element={<EditAsset />} />
           <Route path="/scan"              element={<ScanQR />} />
           <Route path="/reports"           element={<Reports />} />
+          <Route path="/users"             element={<Users />} />
           <Route path="/settings"          element={<Settings />} />
 
           {/* Root landing redirect */}

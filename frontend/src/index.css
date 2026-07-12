@@ -187,3 +187,94 @@ input::placeholder {
 .animate-fade-in {
   animation: fadeIn 0.4s ease-out forwards;
 }
+
+/* ── Light Mode Theme ([data-theme="light"]) ─────────────────────────────── */
+[data-theme="light"] {
+  --bg-primary: #f1f5f9;
+  --bg-secondary: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-glass-hover: rgba(255, 255, 255, 0.95);
+  
+  --accent-primary: #4f46e5;
+  --accent-primary-hover: #4338ca;
+  --accent-secondary: #7c3aed;
+  
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  
+  --border-color: rgba(15, 23, 42, 0.12);
+  --border-focus: rgba(79, 70, 229, 0.4);
+  
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 14px rgba(15, 23, 42, 0.08);
+  --shadow-glow: 0 0 18px rgba(79, 70, 229, 0.18);
+
+  color-scheme: light;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+[data-theme="light"] body {
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(79, 70, 229, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(124, 58, 237, 0.06) 0%, transparent 50%);
+  color: var(--text-primary);
+}
+
+[data-theme="light"] .sidebar {
+  background-color: #ffffff !important;
+  border-right: 1px solid rgba(15, 23, 42, 0.1) !important;
+}
+
+[data-theme="light"] .sidebar .logo {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .sidebar-nav .nav-item {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .sidebar-nav .nav-item:hover,
+[data-theme="light"] .sidebar-nav .nav-item.active {
+  background-color: rgba(79, 70, 229, 0.1) !important;
+  color: #4f46e5 !important;
+}
+
+[data-theme="light"] .topbar {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1) !important;
+}
+
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(15, 23, 42, 0.2) !important;
+}
+
+[data-theme="light"] .topbar-search input {
+  background: #f8fafc !important;
+}
+
+[data-theme="light"] .user-name {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .user-role {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .custom-modal-content {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid rgba(15, 23, 42, 0.15) !important;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15) !important;
+}
+
+[data-theme="light"] .modal-header h2 {
+  color: #0f172a !important;
+}
+

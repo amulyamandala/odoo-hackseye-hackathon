@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { User, Bell, Shield, Palette } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 import '../styles/settings.css';
 
 const Settings = () => {
+  const { isDark, toggleTheme } = useTheme();
   const [activeTab, setActiveTab] = useState('profile');
 
   const [toggles, setToggles] = useState({
     emailNotifs: true,
     pushNotifs: false,
-    darkMode: true,
     twoFactor: false
   });
 
@@ -152,8 +153,8 @@ const Settings = () => {
                     <span className="toggle-desc">Use the dark theme for the application interface</span>
                   </div>
                   <div 
-                    className={`toggle-switch ${toggles.darkMode ? 'on' : ''}`} 
-                    onClick={() => handleToggle('darkMode')}
+                    className={`toggle-switch ${isDark ? 'on' : ''}`} 
+                    onClick={toggleTheme}
                   >
                     <div className="toggle-slider"></div>
                   </div>
