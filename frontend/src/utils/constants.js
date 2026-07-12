@@ -162,3 +162,18 @@ export const MESSAGES = {
   PASSWORD_MIN:     'Password must be at least 8 characters.',
   PASSWORD_MISMATCH:'Passwords do not match.',
 };
+
+/** Common Resource Status Values. */
+export const STATUS_VALUES = {
+  ACTIVE: 'active',
+  INACTIVE: 'inactive',
+  PENDING: 'pending',
+  DRAFT: 'draft',
+};
+
+/** Common system message templates. */
+export const COMMON_MESSAGES = {
+  ERROR_GENERIC: 'Something went wrong. Please try again.',
+  ERROR_NETWORK: 'Network connection issue. Please check your internet.',
+  SUCCESS_GENERIC: 'Operation completed successfully.',
+};
