@@ -30,5 +30,4 @@ router.use('/audits', auditRoutes);
 router.use('/notifications', notificationRoutes);
 router.use('/activity-logs', activityLogRoutes);
 router.use('/reports', reportRoutes);
-
 module.exports = router;
