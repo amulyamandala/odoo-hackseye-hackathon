@@ -2,6 +2,13 @@
 
 Welcome to the backend foundation for **AssetFlow**, an Enterprise Asset & Resource Management System. This document outlines the core architecture, module responsibilities, and guidelines for extending the backend.
 
+## 🚀 Tech Stack (MERN)
+- **Database**: MongoDB (via Mongoose ODM)
+- **Backend Framework**: Express.js
+- **Runtime**: Node.js
+- **Frontend**: React (Implemented in a separate directory/module)
+- **Language**: JavaScript
+
 ## 📁 Folder Structure
 
 The project follows a modular, layered architecture to keep components loosely coupled. All backend code resides inside the `backend/` directory.
@@ -23,10 +30,9 @@ backend/
 │   ├── services/      # Core business logic
 │   ├── utils/         # Generic utilities (Dates, Crypto)
 │   ├── validations/   # Request payload validation schemas (e.g., Joi, Zod)
-│   ├── app.ts         # Express app initialization and middleware binding
-│   └── server.ts      # HTTP server entry point
+│   ├── app.js         # Express app initialization and middleware binding
+│   └── server.js      # HTTP server entry point
 ├── package.json
-└── tsconfig.json
 ```
 
 ---
@@ -76,7 +82,7 @@ The database structure is built around the central **Asset** entity. The models 
 - **Audit Cycle & Audit Record**: For tracking physical presence and condition of assets.
 - **Notification & Activity Log**: System-wide alerting and audit trails.
 
-**Design Rule:** Keep models normalized. Do not duplicate data. Reference related entities via foreign keys.
+**Design Rule:** Use Mongoose Schemas to define entities. Keep models normalized where appropriate, but consider MongoDB's document-oriented nature. Reference related entities via `ObjectId` refs (`mongoose.Schema.Types.ObjectId`).
 
 ---
 
