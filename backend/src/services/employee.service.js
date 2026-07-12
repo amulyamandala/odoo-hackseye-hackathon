@@ -3,16 +3,16 @@ const bcrypt = require("bcryptjs");
 
 class EmployeeService {
   async getAll() {
-    return await Employee.findAll({ 
-      attributes: { exclude: ['password'] },
-      include: [{ model: Department }, { model: Role }] 
+    return await Employee.findAll({
+      attributes: { exclude: ["password"] },
+      include: [{ model: Department }, { model: Role }],
     });
   }
 
   async getById(id) {
-    const emp = await Employee.findByPk(id, { 
-      attributes: { exclude: ['password'] },
-      include: [{ model: Department }, { model: Role }] 
+    const emp = await Employee.findByPk(id, {
+      attributes: { exclude: ["password"] },
+      include: [{ model: Department }, { model: Role }],
     });
     if (!emp) throw new Error("Employee not found");
     return emp;

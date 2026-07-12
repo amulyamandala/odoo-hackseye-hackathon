@@ -2,11 +2,27 @@ const { Department, Employee } = require("../models");
 
 class DepartmentService {
   async getAll() {
-    return await Department.findAll({ include: [{ model: Employee, as: 'head', attributes: ['id', 'firstName', 'lastName'] }] });
+    return await Department.findAll({
+      include: [
+        {
+          model: Employee,
+          as: "head",
+          attributes: ["id", "firstName", "lastName"],
+        },
+      ],
+    });
   }
 
   async getById(id) {
-    const dept = await Department.findByPk(id, { include: [{ model: Employee, as: 'head', attributes: ['id', 'firstName', 'lastName'] }] });
+    const dept = await Department.findByPk(id, {
+      include: [
+        {
+          model: Employee,
+          as: "head",
+          attributes: ["id", "firstName", "lastName"],
+        },
+      ],
+    });
     if (!dept) throw new Error("Department not found");
     return dept;
   }

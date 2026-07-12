@@ -21,7 +21,9 @@ exports.getCategory = async (req, res, next) => {
 exports.createCategory = async (req, res, next) => {
   try {
     const result = await assetCategoryService.create(req.body);
-    res.status(201).json({ message: "Category created successfully", data: result });
+    res
+      .status(201)
+      .json({ message: "Category created successfully", data: result });
   } catch (error) {
     next(error);
   }
@@ -30,7 +32,9 @@ exports.createCategory = async (req, res, next) => {
 exports.updateCategory = async (req, res, next) => {
   try {
     const result = await assetCategoryService.update(req.params.id, req.body);
-    res.status(200).json({ message: "Category updated successfully", data: result });
+    res
+      .status(200)
+      .json({ message: "Category updated successfully", data: result });
   } catch (error) {
     next(error);
   }
