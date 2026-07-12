@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Activity, Mail, Lock, ArrowRight, AlertCircle } from 'lucide-react';
 import useAuth from '../hooks/useAuth';
 import '../styles/login.css';
 
 const Login = () => {
   const { login, isLoading } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError]       = useState('');
@@ -13,7 +16,10 @@ const Login = () => {
     e.preventDefault();
     setError('');
     const result = await login(formData.email, formData.password);
-    if (!result.success) {
+    if (result.success) {
+      const destination = location.state?.from?.pathname || '/dashboard';
+      navigate(destination, { replace: true });
+    } else {
       setError(result.message || 'Invalid credentials. Please try again.');
     }
   };

@@ -52,14 +52,13 @@ export const AuthProvider = ({ children }) => {
     try {
       const { user: profile } = await authService.login(email, password);
       setUser(profile);
-      navigate('/dashboard', { replace: true });
-      return { success: true };
+      return { success: true, user: profile };
     } catch (err) {
       return { success: false, message: err.message || 'Login failed' };
     } finally {
       setIsLoading(false);
     }
-  }, [navigate]);
+  }, []);
 
   // ─── Logout ──────────────────────────────────────────────────────────────────
   const logout = useCallback(() => {
