@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const reportController = require('../controllers/report.controller');
 
-router.get('/dashboard', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/dashboard/my', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/utilization', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/maintenance', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/categories', (req, res) => res.status(501).json({ message: 'Not implemented' }));
+router.get('/dashboard', reportController.getDashboard);
+router.get('/dashboard/my', reportController.getMyDashboard);
+router.get('/utilization', reportController.getUtilizationReport);
+router.get('/maintenance', reportController.getMaintenanceReport);
+router.get('/categories', reportController.getCategoryReport);
 
 module.exports = router;
