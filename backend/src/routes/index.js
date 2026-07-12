@@ -1,0 +1,34 @@
+const express = require('express');
+const router = express.Router();
+
+const authRoutes = require('./auth.routes');
+const departmentRoutes = require('./department.routes');
+const assetCategoryRoutes = require('./assetCategory.routes');
+const employeeRoutes = require('./employee.routes');
+const roleRoutes = require('./role.routes');
+const assetRoutes = require('./asset.routes');
+const allocationRoutes = require('./allocation.routes');
+const transferRoutes = require('./transfer.routes');
+const bookingRoutes = require('./booking.routes');
+const maintenanceRoutes = require('./maintenance.routes');
+const auditRoutes = require('./audit.routes');
+const notificationRoutes = require('./notification.routes');
+const activityLogRoutes = require('./activityLog.routes');
+const reportRoutes = require('./report.routes');
+
+router.use('/auth', authRoutes);
+router.use('/departments', departmentRoutes);
+router.use('/asset-categories', assetCategoryRoutes);
+router.use('/employees', employeeRoutes);
+router.use('/roles', roleRoutes);
+router.use('/assets', assetRoutes);
+router.use('/allocations', allocationRoutes);
+router.use('/transfers', transferRoutes);
+router.use('/bookings', bookingRoutes);
+router.use('/maintenance', maintenanceRoutes);
+router.use('/audits', auditRoutes);
+router.use('/notifications', notificationRoutes);
+router.use('/activity-logs', activityLogRoutes);
+router.use('/reports', reportRoutes);
+
+module.exports = router;

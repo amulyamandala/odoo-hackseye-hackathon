@@ -18,7 +18,7 @@ graph TB
     Controllers["Controller Layer"]
     Services["Service Layer"]
     Repos["Repository Layer"]
-    DB["MongoDB (Mongoose)"]
+    DB["MySQL (Sequelize)"]
 
     Client -->|HTTP Requests| API
     API --> Auth
@@ -46,7 +46,7 @@ sequenceDiagram
     participant CT as Controller
     participant SV as Service
     participant RP as Repository
-    participant DB as MongoDB
+    participant DB as MySQL
 
     C->>RL: HTTP Request
     RL->>AM: Log & Forward
@@ -226,11 +226,11 @@ erDiagram
     }
 
     ACTIVITY_LOG {
-        ObjectId _id
-        ObjectId actor
+        UUID id
+        UUID actorId
         String action
         String entityType
-        ObjectId entityId
+        UUID entityId
         Object details
     }
 ```
@@ -336,8 +336,8 @@ In development mode, the stack trace is included in the `errors` field for debug
 |-----------|------------|
 | Runtime | Node.js |
 | Framework | Express.js |
-| Database | MongoDB |
-| ODM | Mongoose |
+| Database | MySQL |
+| ORM | Sequelize |
 | Auth | JWT (jsonwebtoken) |
 | Validation | Zod (or manual) |
 | CORS | cors package |
