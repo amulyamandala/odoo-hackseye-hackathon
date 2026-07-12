@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
-import PageLayout from './components/PageLayout';
+import Layout from './components/layout/Layout';
 import './App.css';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         
         {/* Protected Routes using Layout */}
-        <Route element={<PageLayout />}>
+        <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/settings" element={<Settings />} />
           {/* Redirect root to dashboard */}
