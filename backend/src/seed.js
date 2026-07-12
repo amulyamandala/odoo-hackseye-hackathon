@@ -42,6 +42,23 @@ const seedDatabase = async () => {
       console.log('Admin user already exists. Skipping.');
     }
 
+    // 3.1 Create odoo@admin.com Admin User
+    const odooEmail = 'odoo@admin.com';
+    const existingOdooAdmin = await db.Employee.findOne({ where: { email: odooEmail } });
+    
+    if (!existingOdooAdmin) {
+      const hashedPassword = await bcrypt.hash('admin123', 10);
+      await db.Employee.create({
+        firstName: 'Odoo',
+        lastName: 'Admin',
+        email: odooEmail,
+        password: hashedPassword,
+        departmentId: itDept.id,
+        roleId: adminRole.id
+      });
+      console.log('Odoo Admin user created successfully: odoo@admin.com / admin123');
+    }
+
     // 3.5 Create User Varun
     const varunEmail = 'varun@odoo.com';
     const existingVarun = await db.Employee.findOne({ where: { email: varunEmail } });
