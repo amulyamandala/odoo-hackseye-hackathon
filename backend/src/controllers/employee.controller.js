@@ -21,7 +21,9 @@ exports.getEmployee = async (req, res, next) => {
 exports.createEmployee = async (req, res, next) => {
   try {
     const result = await employeeService.create(req.body);
-    res.status(201).json({ message: "Employee created successfully", data: result });
+    res
+      .status(201)
+      .json({ message: "Employee created successfully", data: result });
   } catch (error) {
     next(error);
   }
@@ -30,7 +32,9 @@ exports.createEmployee = async (req, res, next) => {
 exports.updateEmployee = async (req, res, next) => {
   try {
     const result = await employeeService.update(req.params.id, req.body);
-    res.status(200).json({ message: "Employee updated successfully", data: result });
+    res
+      .status(200)
+      .json({ message: "Employee updated successfully", data: result });
   } catch (error) {
     next(error);
   }
