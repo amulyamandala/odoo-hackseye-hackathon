@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Package, Users, Activity, Wrench, Download } from 'lucide-react';
+import api from '../services/api';
 
 import DashboardHeader from '../components/dashboard/DashboardHeader';
 import StatsCard       from '../components/dashboard/StatsCard';
@@ -8,14 +9,39 @@ import ActivityChart   from '../components/dashboard/ActivityChart';
 
 import '../styles/dashboard.css';
 
-const STATS = [
-  { title: 'Total Assets',      value: '1,248', icon: Package,  color: 'blue',   trend: '+12%', isUp: true  },
-  { title: 'Allocated',         value: '982',   icon: Users,    color: 'green',  trend: '+5%',  isUp: true  },
-  { title: 'Pending Requests',  value: '34',    icon: Activity, color: 'orange', trend: '-2%',  isUp: false },
-  { title: 'In Maintenance',    value: '18',    icon: Wrench,   color: 'purple', trend: '+1%',  isUp: true  },
-];
-
 const Dashboard = () => {
+  const [stats, setStats] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDashboardStats = async () => {
+      try {
+        const response = await api.get('/reports/dashboard');
+        const { assetSummary, bookingStats, maintenanceStats } = response;
+        
+        setStats([
+          { title: 'Total Assets',      value: assetSummary.totalAssets.toString(), icon: Package,  color: 'blue',   trend: '+0%', isUp: true  },
+          { title: 'Allocated',         value: assetSummary.allocated.toString(),   icon: Users,    color: 'green',  trend: '+0%',  isUp: true  },
+          { title: 'Pending Bookings',  value: bookingStats.pendingBookings.toString(),    icon: Activity, color: 'orange', trend: '+0%',  isUp: false },
+          { title: 'In Maintenance',    value: assetSummary.inMaintenance.toString(),    icon: Wrench,   color: 'purple', trend: '+0%',  isUp: true  },
+        ]);
+      } catch (error) {
+        console.error('Failed to fetch dashboard stats:', error);
+        // Fallback to empty if it fails
+        setStats([
+          { title: 'Total Assets',      value: '0', icon: Package,  color: 'blue',   trend: '-', isUp: true  },
+          { title: 'Allocated',         value: '0',   icon: Users,    color: 'green',  trend: '-',  isUp: true  },
+          { title: 'Pending Bookings',  value: '0',    icon: Activity, color: 'orange', trend: '-',  isUp: false },
+          { title: 'In Maintenance',    value: '0',    icon: Wrench,   color: 'purple', trend: '-',  isUp: true  },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardStats();
+  }, []);
+
   return (
     <div className="animate-fade-in">
       {/* Header */}
@@ -32,9 +58,13 @@ const Dashboard = () => {
 
       {/* Stats Grid */}
       <div className="metrics-grid">
-        {STATS.map((stat) => (
-          <StatsCard key={stat.title} {...stat} />
-        ))}
+        {loading ? (
+           <p style={{ color: 'var(--text-secondary)' }}>Loading live stats...</p>
+        ) : (
+          stats.map((stat) => (
+            <StatsCard key={stat.title} {...stat} />
+          ))
+        )}
       </div>
 
       {/* Charts Row */}
