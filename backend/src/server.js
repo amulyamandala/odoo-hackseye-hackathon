@@ -1,9 +1,19 @@
 const app = require('./app');
-const config = require('./config/env.config');
-const connectDB = require('./database/connection');
+const db = require('./models');
+const PORT = process.env.PORT || 3000;
 
-connectDB();
+const startServer = async () => {
+  try {
+    await db.sequelize.sync({ alter: true });
+    console.log('Database synced successfully');
+    
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+};
 
-app.listen(config.port, () => {
-  console.log(`Server running in ${config.environment} mode on port ${config.port}`);
-});
+startServer();
