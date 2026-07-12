@@ -18,7 +18,7 @@ graph TB
     Controllers["Controller Layer"]
     Services["Service Layer"]
     Repos["Repository Layer"]
-    DB["MySQL (Sequelize)"]
+    DB["SQLite (Sequelize)"]
 
     Client -->|HTTP Requests| API
     API --> Auth
@@ -46,7 +46,7 @@ sequenceDiagram
     participant CT as Controller
     participant SV as Service
     participant RP as Repository
-    participant DB as MySQL
+    participant DB as SQLite
 
     C->>RL: HTTP Request
     RL->>AM: Log & Forward
@@ -336,7 +336,7 @@ In development mode, the stack trace is included in the `errors` field for debug
 |-----------|------------|
 | Runtime | Node.js |
 | Framework | Express.js |
-| Database | MySQL |
+| Database | SQLite |
 | ORM | Sequelize |
 | Auth | JWT (jsonwebtoken) |
 | Validation | Zod (or manual) |

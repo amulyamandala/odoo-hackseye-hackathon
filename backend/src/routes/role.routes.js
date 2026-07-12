@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const roleController = require('../controllers/role.controller');
 
-router.post('/', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/:id', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.put('/:id', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.delete('/:id', (req, res) => res.status(501).json({ message: 'Not implemented' }));
+router.post('/', roleController.createRole);
+router.get('/', roleController.getRoles);
+router.get('/:id', roleController.getRole);
+router.put('/:id', roleController.updateRole);
+router.delete('/:id', roleController.deleteRole);
 
 module.exports = router;

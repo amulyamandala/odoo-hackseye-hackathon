@@ -6,8 +6,7 @@ import api from './api';
  * @returns {Promise<any>}
  */
 export const getAssets = async (params = {}) => {
-  const response = await api.get('/assets', { params });
-  return response.data;
+  return api.get('/assets', { params });
 };
 
 /**
@@ -16,8 +15,7 @@ export const getAssets = async (params = {}) => {
  * @returns {Promise<any>}
  */
 export const getAssetById = async (id) => {
-  const response = await api.get(`/assets/${id}`);
-  return response.data;
+  return api.get(`/assets/${id}`);
 };
 
 /**
@@ -26,8 +24,7 @@ export const getAssetById = async (id) => {
  * @returns {Promise<any>}
  */
 export const createAsset = async (data) => {
-  const response = await api.post('/assets', data);
-  return response.data;
+  return api.post('/assets', data);
 };
 
 /**
@@ -37,8 +34,7 @@ export const createAsset = async (data) => {
  * @returns {Promise<any>}
  */
 export const updateAsset = async (id, data) => {
-  const response = await api.put(`/assets/${id}`, data);
-  return response.data;
+  return api.put(`/assets/${id}`, data);
 };
 
 /**
@@ -47,6 +43,5 @@ export const updateAsset = async (id, data) => {
  * @returns {Promise<any>}
  */
 export const deleteAsset = async (id) => {
-  const response = await api.delete(`/assets/${id}`);
-  return response.data;
+  return api.delete(`/assets/${id}`);
 };

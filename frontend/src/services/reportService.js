@@ -6,8 +6,7 @@ import api from './api';
  * @returns {Promise<any>}
  */
 export const getReports = async (params = {}) => {
-  const response = await api.get('/reports', { params });
-  return response.data;
+  return api.get('/reports', { params });
 };
 
 /**
@@ -16,8 +15,7 @@ export const getReports = async (params = {}) => {
  * @returns {Promise<any>}
  */
 export const getReport = async (id) => {
-  const response = await api.get(`/reports/${id}`);
-  return response.data;
+  return api.get(`/reports/${id}`);
 };
 
 /**
@@ -26,8 +24,7 @@ export const getReport = async (id) => {
  * @returns {Promise<any>}
  */
 export const exportReport = async (params = {}) => {
-  const response = await api.post('/reports/export', params);
-  return response.data;
+  return api.post('/reports/export', params);
 };
 
 /**
@@ -37,9 +34,5 @@ export const exportReport = async (params = {}) => {
  * @returns {Promise<any>}
  */
 export const downloadReport = async (id, format = 'csv') => {
-  const response = await api.get(`/reports/${id}/download`, {
-    params: { format },
-    responseType: 'blob',
-  });
-  return response.data;
+  return api.get(`/reports/${id}/download`, { params: { format } });
 };
