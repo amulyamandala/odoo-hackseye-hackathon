@@ -21,7 +21,9 @@ exports.getDepartment = async (req, res, next) => {
 exports.createDepartment = async (req, res, next) => {
   try {
     const result = await departmentService.create(req.body);
-    res.status(201).json({ message: "Department created successfully", data: result });
+    res
+      .status(201)
+      .json({ message: "Department created successfully", data: result });
   } catch (error) {
     next(error);
   }
@@ -30,7 +32,9 @@ exports.createDepartment = async (req, res, next) => {
 exports.updateDepartment = async (req, res, next) => {
   try {
     const result = await departmentService.update(req.params.id, req.body);
-    res.status(200).json({ message: "Department updated successfully", data: result });
+    res
+      .status(200)
+      .json({ message: "Department updated successfully", data: result });
   } catch (error) {
     next(error);
   }
