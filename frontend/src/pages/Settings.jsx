@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { User, Bell, Shield, Palette } from 'lucide-react';
+import useAuth from '../hooks/useAuth';
 import '../styles/settings.css';
 
 const Settings = () => {
+  const { user, changePassword } = useAuth();
   const [activeTab, setActiveTab] = useState('profile');
 
   const [toggles, setToggles] = useState({
@@ -12,8 +14,38 @@ const Settings = () => {
     twoFactor: false
   });
 
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: '',
+    newPassword: '',
+  });
+  const [passwordSuccess, setPasswordSuccess] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [submittingPassword, setSubmittingPassword] = useState(false);
+
   const handleToggle = (key) => {
     setToggles(prev => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    setPasswordSuccess('');
+    setPasswordError('');
+
+    if (!passwordData.currentPassword || !passwordData.newPassword) {
+      setPasswordError('Please fill in all password fields.');
+      return;
+    }
+
+    setSubmittingPassword(true);
+    try {
+      await changePassword(passwordData.currentPassword, passwordData.newPassword);
+      setPasswordSuccess('Password updated successfully!');
+      setPasswordData({ currentPassword: '', newPassword: '' });
+    } catch (err) {
+      setPasswordError(err.message || 'Failed to update password. Verify current password.');
+    } finally {
+      setSubmittingPassword(false);
+    }
   };
 
   const tabs = [
@@ -52,22 +84,37 @@ const Settings = () => {
                 <div className="settings-form">
                   <div className="settings-row">
                     <label>Full Name</label>
-                    <input type="text" defaultValue="John Doe" />
+                    <input 
+                      type="text" 
+                      value={user ? `${user.firstName || ''} ${user.lastName || ''}`.trim() : 'Guest User'} 
+                      readOnly 
+                      style={{ opacity: 0.8 }} 
+                    />
                   </div>
                   <div className="settings-row">
                     <label>Email Address</label>
-                    <input type="email" defaultValue="john.doe@company.com" readOnly style={{ opacity: 0.7 }} />
+                    <input 
+                      type="email" 
+                      value={user?.email || ''} 
+                      readOnly 
+                      style={{ opacity: 0.8 }} 
+                    />
                   </div>
                   <div className="settings-row">
                     <label>Role</label>
-                    <input type="text" defaultValue="Asset Manager" readOnly style={{ opacity: 0.7 }} />
+                    <input 
+                      type="text" 
+                      value={user?.role?.name || user?.role || 'Employee'} 
+                      readOnly 
+                      style={{ opacity: 0.8 }} 
+                    />
                   </div>
                 </div>
               </div>
 
               <div className="settings-actions">
-                <button className="btn btn-secondary">Cancel</button>
-                <button className="btn btn-primary">Save Changes</button>
+                <button className="btn btn-secondary" onClick={() => setActiveTab('profile')}>Reset</button>
+                <button className="btn btn-primary" disabled>Save Changes</button>
               </div>
             </div>
           )}
@@ -111,19 +158,39 @@ const Settings = () => {
               <div className="settings-section">
                 <h3>Password & Security</h3>
                 
-                <div className="settings-form" style={{ marginBottom: '2rem' }}>
+                {passwordSuccess && <div className="alert alert-success">{passwordSuccess}</div>}
+                {passwordError && <div className="alert alert-danger">{passwordError}</div>}
+
+                <form onSubmit={handlePasswordSubmit} className="settings-form" style={{ marginBottom: '2rem' }}>
                   <div className="settings-row">
                     <label>Current Password</label>
-                    <input type="password" placeholder="••••••••" />
+                    <input 
+                      type="password" 
+                      placeholder="••••••••" 
+                      value={passwordData.currentPassword}
+                      onChange={(e) => setPasswordData(prev => ({ ...prev, currentPassword: e.target.value }))}
+                      required
+                    />
                   </div>
                   <div className="settings-row">
                     <label>New Password</label>
-                    <input type="password" placeholder="••••••••" />
+                    <input 
+                      type="password" 
+                      placeholder="••••••••" 
+                      value={passwordData.newPassword}
+                      onChange={(e) => setPasswordData(prev => ({ ...prev, newPassword: e.target.value }))}
+                      required
+                    />
                   </div>
-                  <button className="btn btn-secondary" style={{ width: 'fit-content', marginTop: '0.5rem' }}>
-                    Update Password
+                  <button 
+                    type="submit" 
+                    className="btn btn-secondary" 
+                    style={{ width: 'fit-content', marginTop: '0.5rem' }}
+                    disabled={submittingPassword}
+                  >
+                    {submittingPassword ? 'Updating...' : 'Update Password'}
                   </button>
-                </div>
+                </form>
 
                 <div className="toggle-row" style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
                   <div className="toggle-label">
