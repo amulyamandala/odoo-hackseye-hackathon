@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const allocationController = require('../controllers/allocation.controller');
 
-router.post('/', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.patch('/:id/return', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/asset/:assetId', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/employee/:empId', (req, res) => res.status(501).json({ message: 'Not implemented' }));
+router.post('/', allocationController.createAllocation);
+router.get('/', allocationController.getAllocations);
+router.get('/:id', allocationController.getAllocation);
+router.put('/:id', allocationController.updateAllocation);
+router.delete('/:id', allocationController.deleteAllocation);
 
 module.exports = router;
