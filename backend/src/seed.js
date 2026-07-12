@@ -41,6 +41,23 @@ const seedDatabase = async () => {
     } else {
       console.log('Admin user already exists. Skipping.');
     }
+
+    // 3.5 Create User Varun
+    const varunEmail = 'varun@odoo.com';
+    const existingVarun = await db.Employee.findOne({ where: { email: varunEmail } });
+    
+    if (!existingVarun) {
+      const hashedPassword = await bcrypt.hash('Kabc@123', 10);
+      await db.Employee.create({
+        firstName: 'Varun',
+        lastName: 'Admin',
+        email: varunEmail,
+        password: hashedPassword,
+        departmentId: itDept.id,
+        roleId: adminRole.id
+      });
+      console.log('User Varun created successfully: varun@odoo.com / Kabc@123');
+    }
     
     // 4. Create some basic Asset Categories
     await db.AssetCategory.findOrCreate({ where: { name: 'Laptops' } });
