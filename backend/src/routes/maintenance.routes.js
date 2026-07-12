@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const maintenanceController = require('../controllers/maintenance.controller');
 
-router.post('/', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/my', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.patch('/:id/assign', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.patch('/:id/resolve', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.patch('/:id/reject', (req, res) => res.status(501).json({ message: 'Not implemented' }));
+router.post('/', maintenanceController.createMaintenanceRequest);
+router.get('/', maintenanceController.getMaintenanceRequests);
+router.get('/:id', maintenanceController.getMaintenanceRequest);
+router.put('/:id', maintenanceController.updateMaintenanceRequest);
+router.delete('/:id', maintenanceController.deleteMaintenanceRequest);
 
 module.exports = router;

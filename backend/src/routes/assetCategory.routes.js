@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const assetCategoryController = require('../controllers/assetCategory.controller');
 
-router.post('/', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.get('/:id', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.put('/:id', (req, res) => res.status(501).json({ message: 'Not implemented' }));
-router.delete('/:id', (req, res) => res.status(501).json({ message: 'Not implemented' }));
+router.post('/', assetCategoryController.createCategory);
+router.get('/', assetCategoryController.getCategories);
+router.get('/:id', assetCategoryController.getCategory);
+router.put('/:id', assetCategoryController.updateCategory);
+router.delete('/:id', assetCategoryController.deleteCategory);
 
 module.exports = router;
