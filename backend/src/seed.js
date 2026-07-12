@@ -7,7 +7,7 @@ const seedDatabase = async () => {
     console.log('Connecting to database...');
     await db.sequelize.authenticate();
     
-    await db.sequelize.sync({ alter: true });
+    await db.sequelize.sync();
     console.log('Database synced. Checking for existing roles...');
     
     // 1. Create Roles
