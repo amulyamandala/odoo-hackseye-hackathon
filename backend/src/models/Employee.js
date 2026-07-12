@@ -15,6 +15,7 @@ const Employee = sequelize.define('Employee', {
      allowNull: false,
       unique: true },
   password: { type: DataTypes.STRING, allowNull: false },
+  lastLogin: { type: DataTypes.DATE, allowNull: true },
   isActive: { type: DataTypes.BOOLEAN,
      defaultValue: true },
 });
