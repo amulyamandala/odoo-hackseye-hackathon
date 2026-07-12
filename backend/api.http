@@ -1,0 +1,92 @@
+### Variables
+@baseUrl = http://localhost:3000/api
+# The authToken will automatically be captured from the login response!
+@authToken = {{login.response.body.data.token}}
+
+### ==========================================
+### 1. AUTHENTICATION
+### ==========================================
+
+### Login as the Default Admin (Created by seed.js)
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@odoo.com",
+    "password": "admin123"
+}
+
+### Register a new Employee
+# @name register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@odoo.com",
+    "password": "password123",
+    "departmentId": "REPLACE_WITH_UUID",
+    "roleId": "REPLACE_WITH_UUID"
+}
+
+
+### ==========================================
+### 2. DEPARTMENTS
+### ==========================================
+
+### Get all Departments
+GET {{baseUrl}}/departments
+Authorization: Bearer {{authToken}}
+
+
+### ==========================================
+### 3. ASSETS
+### ==========================================
+
+### Get all Assets
+GET {{baseUrl}}/assets
+Authorization: Bearer {{authToken}}
+
+### Create a new Asset
+POST {{baseUrl}}/assets
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "name": "MacBook Pro M3 Max",
+    "description": "16-inch, 64GB RAM, Space Black",
+    "serialNumber": "MBP-2024-001",
+    "categoryId": "REPLACE_WITH_UUID"
+}
+
+
+### ==========================================
+### 4. ASSET ALLOCATIONS
+### ==========================================
+
+### Allocate an Asset to an Employee
+POST {{baseUrl}}/allocations
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "assetId": "REPLACE_WITH_UUID",
+    "employeeId": "REPLACE_WITH_UUID"
+}
+
+### ==========================================
+### 5. RESOURCE BOOKINGS
+### ==========================================
+
+### Book an asset (like a projector or meeting room)
+POST {{baseUrl}}/bookings
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "assetId": "REPLACE_WITH_UUID",
+    "startDate": "2024-10-01T09:00:00Z",
+    "endDate": "2024-10-01T11:00:00Z"
+}
