@@ -24,6 +24,21 @@ const buildHeaders = (extra = {}) => {
   return headers;
 };
 
+const buildUrl = (path, params) => {
+  let url = `${env.API_BASE_URL}${path}`;
+  if (params && Object.keys(params).length > 0) {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, val]) => {
+      if (val !== undefined && val !== null && val !== '') {
+        searchParams.append(key, val);
+      }
+    });
+    const qs = searchParams.toString();
+    if (qs) url += `?${qs}`;
+  }
+  return url;
+};
+
 const handleResponse = async (res) => {
   const json = await res.json().catch(() => ({}));
 
@@ -45,34 +60,34 @@ const handleResponse = async (res) => {
 
 const api = {
   get: (path, opts = {}) =>
-    fetch(`${env.API_BASE_URL}${path}`, {
+    fetch(buildUrl(path, opts.params), {
       method: 'GET',
       headers: buildHeaders(opts.headers),
     }).then(handleResponse),
 
   post: (path, body, opts = {}) =>
-    fetch(`${env.API_BASE_URL}${path}`, {
+    fetch(buildUrl(path, opts.params), {
       method: 'POST',
       headers: buildHeaders(opts.headers),
       body: JSON.stringify(body),
     }).then(handleResponse),
 
   put: (path, body, opts = {}) =>
-    fetch(`${env.API_BASE_URL}${path}`, {
+    fetch(buildUrl(path, opts.params), {
       method: 'PUT',
       headers: buildHeaders(opts.headers),
       body: JSON.stringify(body),
     }).then(handleResponse),
 
   patch: (path, body, opts = {}) =>
-    fetch(`${env.API_BASE_URL}${path}`, {
+    fetch(buildUrl(path, opts.params), {
       method: 'PATCH',
       headers: buildHeaders(opts.headers),
       body: JSON.stringify(body),
     }).then(handleResponse),
 
   delete: (path, opts = {}) =>
-    fetch(`${env.API_BASE_URL}${path}`, {
+    fetch(buildUrl(path, opts.params), {
       method: 'DELETE',
       headers: buildHeaders(opts.headers),
     }).then(handleResponse),
